@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+         xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+         xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
+         xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+         IgnorableNamespaces="uap uap3 com rescap">
+  <Identity Name="WidgetsRS.Dev" Publisher="CN=Widgets RS Development" Version="0.2.0.0" ProcessorArchitecture="x64" />
+  <Properties>
+    <DisplayName>Widgets RS</DisplayName>
+    <PublisherDisplayName>Widgets RS Development</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.22621.0" MaxVersionTested="10.0.26100.0" />
+    <PackageDependency Name="Microsoft.WindowsAppRuntime.2" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" MinVersion="2.4.0.0" />
+  </Dependencies>
+  <Resources><Resource Language="en-us" /></Resources>
+  <Applications>
+    <Application Id="App" Executable="WidgetsRs.exe" EntryPoint="Windows.FullTrustApplication">
+      <uap:VisualElements DisplayName="Widgets RS" Description="Discover and manage native Windows widgets"
+                          BackgroundColor="transparent" Square150x150Logo="Assets\Square150x150Logo.png"
+                          Square44x44Logo="Assets\Square44x44Logo.png">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" />
+      </uap:VisualElements>
+      <Extensions>
+        <com:Extension Category="windows.comServer">
+          <com:ComServer>
+            <com:ExeServer Executable="WidgetsRsProvider.exe" DisplayName="Widgets RS provider">
+              <com:Class Id="B1CF0DDE-5CD2-48CF-94CE-CB9BEF27D09A" DisplayName="Widgets RS provider" />
+            </com:ExeServer>
+          </com:ComServer>
+        </com:Extension>
+        <uap3:Extension Category="windows.protocol">
+          <uap3:Protocol Name="widgetsrs" Parameters="&quot;%1&quot;" />
+        </uap3:Extension>
+        <uap3:Extension Category="windows.appExtension">
+          <uap3:AppExtension Name="com.microsoft.windows.widgets" DisplayName="Widgets RS" Id="WidgetsRS" PublicFolder="Assets">
+            <uap3:Properties>
+              <WidgetProvider>
+                <ProviderIcons><Icon Path="Assets\StoreLogo.png" /></ProviderIcons>
+                <Activation><CreateInstance ClassId="B1CF0DDE-5CD2-48CF-94CE-CB9BEF27D09A" /></Activation>
+                <Definitions>
+                  <Definition Id="Clock" DisplayName="World Clock" Description="See the time in the cities you care about" AllowMultiple="true" IsCustomizable="true">
+                    <Capabilities>
+                      <Capability><Size Name="small" /></Capability>
+                      <Capability><Size Name="medium" /></Capability>
+                      <Capability><Size Name="large" /></Capability>
+                    </Capabilities>
+                    <ThemeResources>
+                      <Icons><Icon Path="Assets\ClockIcon.png" /></Icons>
+                      <Screenshots><Screenshot Path="Assets\ClockPreviewLight.png" DisplayAltText="World Clock showing two city times" /></Screenshots>
+                      <DarkMode><Screenshots><Screenshot Path="Assets\ClockPreviewDark.png" DisplayAltText="World Clock showing two city times in dark mode" /></Screenshots></DarkMode>
+                    </ThemeResources>
+                  </Definition>
+                </Definitions>
+              </WidgetProvider>
+            </uap3:Properties>
+          </uap3:AppExtension>
+          </uap3:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+  <Capabilities><rescap:Capability Name="runFullTrust" /></Capabilities>
+</Package>

@@ -1,0 +1,8 @@
+/target/
+/tools/bindings/target/
+/dist/
+*.pfx
+*.cer
+*.msix
+*.msixbundle
+

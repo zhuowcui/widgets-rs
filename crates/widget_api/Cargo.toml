@@ -1,0 +1,13 @@
+[package]
+name = "widget_api"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+publish = false
+
+[dependencies]
+windows-core.workspace = true
+windows-collections.workspace = true
+windows-time.workspace = true
+windows-reference.workspace = true
+

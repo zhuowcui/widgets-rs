@@ -1,0 +1,15 @@
+[package]
+name = "widgets_settings"
+version = "0.2.0"
+edition.workspace = true
+rust-version.workspace = true
+publish = false
+
+[dependencies]
+clock_core = { path = "../clock_core" }
+widget_api = { path = "../widget_api" }
+windows-core.workspace = true
+windows-collections.workspace = true
+windows-time.workspace = true
+windows-reactor = "=0.100.0"
+windows-future = "=0.100.0"
